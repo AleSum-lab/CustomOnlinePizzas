@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaOrderApi", "PizzaOrderApi\PizzaOrderApi.csproj", "{5610C308-6990-4B22-A5FC-B0165230BD3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModels", "DataModels\DataModels.csproj", "{EFE74B46-22A9-45E2-9331-A52C9E00997E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5610C308-6990-4B22-A5FC-B0165230BD3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5610C308-6990-4B22-A5FC-B0165230BD3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5610C308-6990-4B22-A5FC-B0165230BD3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5610C308-6990-4B22-A5FC-B0165230BD3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE74B46-22A9-45E2-9331-A52C9E00997E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE74B46-22A9-45E2-9331-A52C9E00997E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE74B46-22A9-45E2-9331-A52C9E00997E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE74B46-22A9-45E2-9331-A52C9E00997E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2DA1B501-FF2A-4CBD-9140-8DA9F0557DE0}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,130 @@
+﻿@page
+@model COPWebApp.OrderModel
+@{
+    ViewData["Title"] = "Order";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-4" style="border:2px solid grey">
+            <h4>Create your pizza</h4>
+            <form method="post">
+                <table class="table table-borderless table-hover" style="width:100%">
+                    <tr>
+                        <td>Tomato sauce</td>
+                        <td>
+                            <input asp-for="TomatoChecked" class="form-check-input" />
+                            <label asp-for="TomatoChecked" class="form-check-label">$1.00</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mozzarella cheese</td>
+                        <td>
+                            <input asp-for="MozzarellaChecked" class="form-check-input" />
+                            <label asp-for="MozzarellaChecked" class="form-check-label">$1.00</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ham</td>
+                        <td>
+                            <input asp-for="HamChecked" class="form-check-input" />
+                            <label asp-for="HamChecked" class="form-check-label">$1.49</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kebab</td>
+                        <td>
+                            <input asp-for="KebabChecked" class="form-check-input" />
+                            <label asp-for="KebabChecked" class="form-check-label">$2.99</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>TOTAL:</th>
+                        <th>
+                            <label asp-for="Total" class="form-check-label">= $5.00</label>
+                        </th>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td class="pl-0">
+                            <input type="submit" value="ADD TO CART" class="btn btn-light" />
+                        </td>
+                    </tr>
+                </table>                
+            </form>
+        </div>
+        <div class="col p-4" style="border:2px solid grey">
+            <h4>Order summary</h4>
+            <form method="post">
+                <div class="row" style="overflow-y:scroll; max-height:150px;">
+                    <table class="table table-borderless table-responsive" style="width:100%">
+                        <tr>
+                            <td>#1</td>
+                            <td>Pizza 1</td>
+                            <td>$6.50</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>Pizza 1</td>
+                            <td>$6.50</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>Pizza 1</td>
+                            <td>$6.50</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>Pizza 1</td>
+                            <td>$6.50</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>Pizza 1</td>
+                            <td>$6.50</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>Pizza 1</td>
+                            <td>$6.50</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col">
+                        <table class="table table-borderless" style="width:100%">
+                            <tr>
+                                <td>Distance</td>
+                                <td>
+                                    <input asp-for="Order.DeliveryDistance" class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Delivery fee</td>
+                                <td>
+                                    <label asp-for="Order.DeliveryFee" class="form-check-label">$3.50</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TOTALS</td>
+                                <td>
+                                    <label asp-for="Order.TotalPrice" class="form-check-label">$10.00</label>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td></td>
+                                <td class="pl-0">
+                                    <input type="submit" value="PLACE ORDER" class="btn btn-light" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
