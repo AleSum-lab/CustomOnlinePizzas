@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessModels", "BusinessModels\BusinessModels.csproj", "{52CF23EB-4A97-410C-B225-2E869E006B67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessModels", "BusinessModels\BusinessModels.csproj", "{52CF23EB-4A97-410C-B225-2E869E006B67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{5364C20A-47CB-4A32-8D96-434A85875631}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{5364C20A-47CB-4A32-8D96-434A85875631}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{D37DCF16-E616-49DC-AD82-BDA63B7BB526}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{D37DCF16-E616-49DC-AD82-BDA63B7BB526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COPWebApp", "COPWebApp\COPWebApp.csproj", "{9E322159-3480-4C5B-ACEA-E5A990F04476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "COPWebApp", "COPWebApp\COPWebApp.csproj", "{9E322159-3480-4C5B-ACEA-E5A990F04476}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationSettings", "ApplicationSettings\ApplicationSettings.csproj", "{40EC2409-01A0-4F50-982F-BFDFC750E956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategies", "Strategies\Strategies.csproj", "{628A6B33-72A8-4A6D-BAD9-31C6B3B54D0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{9E322159-3480-4C5B-ACEA-E5A990F04476}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E322159-3480-4C5B-ACEA-E5A990F04476}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E322159-3480-4C5B-ACEA-E5A990F04476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EC2409-01A0-4F50-982F-BFDFC750E956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EC2409-01A0-4F50-982F-BFDFC750E956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EC2409-01A0-4F50-982F-BFDFC750E956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EC2409-01A0-4F50-982F-BFDFC750E956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628A6B33-72A8-4A6D-BAD9-31C6B3B54D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628A6B33-72A8-4A6D-BAD9-31C6B3B54D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628A6B33-72A8-4A6D-BAD9-31C6B3B54D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628A6B33-72A8-4A6D-BAD9-31C6B3B54D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

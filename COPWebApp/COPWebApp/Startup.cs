@@ -12,6 +12,11 @@ using COPWebApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+//using COPWebApp.Settings;
+using Contracts;
+using Services;
+using Microsoft.Extensions.Options;
+using ApplicationSettings;
 
 namespace COPWebApp
 {
@@ -27,12 +32,26 @@ namespace COPWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+
+            services.Configure<EndpointSettings>(options => Configuration.GetSection("EndpointSettings").Bind(options));
+            services.Configure<AuthSettings>(options => Configuration.GetSection("AuthSettings").Bind(options));
+            services.Configure<IngredientPriceListSettings>(options => Configuration.GetSection("IngredientPriceListSettings").Bind(options));
+            services.Configure<DeliveryFeePolicySettings>(options => Configuration.GetSection("DeliveryFeePolicySettings").Bind(options));
+
+            services.AddSingleton<IServiceClient>(x => new OrderService(x.GetRequiredService<IOptions<AuthSettings>>().Value.UserName,
+                                                                        x.GetRequiredService<IOptions<AuthSettings>>().Value.Password));
+
+            services.AddScoped<IPriceCalculator, PriceCalculatorService>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -84,7 +103,7 @@ namespace COPWebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();

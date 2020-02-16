@@ -4,5 +4,36 @@
     ViewData["Title"] = "OrderHistory";
 }
 
-<h1>OrderHistory</h1>
+<div class="container">
+    <div class="row">
+        <div class="col p-4">
+            <h4>Your Order History</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Orders[0].Id)</th>
+                        <th> @Html.DisplayNameFor(model => model.Orders[0].DateCreated)</th>
+                        <th> @Html.DisplayNameFor(model => model.Orders[0].Items)</th>
+                        <th> @Html.DisplayNameFor(model => model.Orders[0].DeliveryFee)</th>
+                        <th> @Html.DisplayNameFor(model => model.Orders[0].DeliveryDistance)</th>
+                        <th> @Html.DisplayNameFor(model => model.Orders[0].TotalPrice)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Orders)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Items)</td>          @*Fix me*@
+                        <td>@Html.DisplayFor(modelItem => item.DeliveryFee)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DeliveryDistance)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 

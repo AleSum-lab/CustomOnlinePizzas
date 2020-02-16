@@ -1,47 +1,53 @@
 ﻿@page
 @model COPWebApp.OrderModel
-@{
-    ViewData["Title"] = "Order";
+@using System.Globalization
+@{    
+    ViewData["Title"] = "Order";    
 }
 
 <div class="container">
     <div class="row">
         <div class="col p-4" style="border:2px solid grey">
             <h4>Create your pizza</h4>
-            <form method="post">
-                <table class="table table-borderless table-hover" style="width:100%">
+            <form asp-page-handler="addItem" method="post">
+                <table id="createPizzaTable" class="table table-borderless table-hover" style="width:100%">
                     <tr>
                         <td>Tomato sauce</td>
                         <td>
-                            <input asp-for="TomatoChecked" class="form-check-input" />
-                            <label asp-for="TomatoChecked" class="form-check-label">$1.00</label>
+                            <input type="hidden" value="@ViewData["TomatoSauce"]" id="tomatoSauce" />
+                            <input asp-for="TomatoChecked" class="form-check-input" onchange="" id="cbTomato" onclick="add('tomatoSauce')"/>
+                            <label asp-for="TomatoChecked" class="form-check-label">$@ViewData["TomatoSauce"]</label>
                         </td>
                     </tr>
                     <tr>
                         <td>Mozzarella cheese</td>
                         <td>
-                            <input asp-for="MozzarellaChecked" class="form-check-input" />
-                            <label asp-for="MozzarellaChecked" class="form-check-label">$1.00</label>
+                            <input type="hidden" value="@ViewData["MozzarellaCheese"]" id="mozzarellaCheese" />
+                            <input asp-for="MozzarellaChecked" class="form-check-input" id="cbMozzarella" onclick="add('mozzarellaCheese')"/>
+                            <label asp-for="MozzarellaChecked" class="form-check-label">$@ViewData["MozzarellaCheese"]</label>
                         </td>
                     </tr>
                     <tr>
                         <td>Ham</td>
                         <td>
-                            <input asp-for="HamChecked" class="form-check-input" />
-                            <label asp-for="HamChecked" class="form-check-label">$1.49</label>
+                            <input type="hidden" value="@ViewData["Ham"]" id="ham" />
+                            <input asp-for="HamChecked" class="form-check-input" id="cbHam" onclick="add('ham')"/>
+                            <label asp-for="HamChecked" class="form-check-label">$@ViewData["Ham"]</label>
                         </td>
                     </tr>
                     <tr>
                         <td>Kebab</td>
                         <td>
-                            <input asp-for="KebabChecked" class="form-check-input" />
-                            <label asp-for="KebabChecked" class="form-check-label">$2.99</label>
+                            <input type="hidden" value="@ViewData["Kebab"]" id="kebab" />
+                            <input asp-for="KebabChecked" class="form-check-input" id="cbKebab" onclick="add('kebab')"/>
+                            <label asp-for="KebabChecked" class="form-check-label">$@ViewData["Kebab"]</label>
                         </td>
                     </tr>
                     <tr>
                         <th>TOTAL:</th>
                         <th>
-                            <label asp-for="Total" class="form-check-label">= $5.00</label>
+                            <input type="hidden" value="@ViewData["PizzaBase"]" id="pizzaBase" />
+                            <label asp-for="Total" class="form-check-label" id="total"></label>
                         </th>
                     </tr>
                     <tr></tr>
@@ -56,39 +62,26 @@
         </div>
         <div class="col p-4" style="border:2px solid grey">
             <h4>Order summary</h4>
-            <form method="post">
+            <form asp-page-handler="placeOrder" method="post">
                 <div class="row" style="overflow-y:scroll; max-height:150px;">
                     <table class="table table-borderless table-responsive" style="width:100%">
-                        <tr>
-                            <td>#1</td>
-                            <td>Pizza 1</td>
-                            <td>$6.50</td>
-                        </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>Pizza 1</td>
-                            <td>$6.50</td>
-                        </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>Pizza 1</td>
-                            <td>$6.50</td>
-                        </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>Pizza 1</td>
-                            <td>$6.50</td>
-                        </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>Pizza 1</td>
-                            <td>$6.50</td>
-                        </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>Pizza 1</td>
-                            <td>$6.50</td>
-                        </tr>
+                        @{
+                            if (Model.Order.Items != null)
+                            {
+                                var i = 1;
+
+                                foreach (var item in Model.Order.Items)
+                                {
+                                    <tr>
+                                        <td>#@i</td>
+                                        <td>@item.Description</td>
+                                        <td>$@item.TotalPrice.ToString("F2")</td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+
+                        }
                     </table>
                 </div>
                 <div class="row">
@@ -98,19 +91,22 @@
                             <tr>
                                 <td>Distance</td>
                                 <td>
-                                    <input asp-for="Order.DeliveryDistance" class="form-control" />
+                                    <input asp-for="Order.DeliveryDistance" class="form-control" id="distance" oninput="calculateDeliveryFee()"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Delivery fee</td>
                                 <td>
-                                    <label asp-for="Order.DeliveryFee" class="form-check-label">$3.50</label>
+                                    <input type="hidden" value="@ViewData["FiveToTen"]" id="fiveToTen" />
+                                    <input type="hidden" value="@ViewData["TenToTwenty"]" id="tenToTwenty" />
+                                    <label asp-for="Order.DeliveryFee" class="form-check-label" id="deliveryFeeLb"></label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>TOTALS</td>
                                 <td>
-                                    <label asp-for="Order.TotalPrice" class="form-check-label">$10.00</label>
+                                    <input asp-for="Order.TotalPrice" type="hidden" value="@Model.Order.TotalPrice.ToString("F2", CultureInfo.InvariantCulture.NumberFormat)" id="totalPrice" />
+                                    <label asp-for="Order.TotalPrice" class="form-check-label" id="orderTotal">$@Model.Order.TotalPrice.ToString("F2")</label>
                                 </td>
                             </tr>
                             <tr></tr>
@@ -128,3 +124,7 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+
+</script>

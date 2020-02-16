@@ -2,16 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts;
+using DataLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+//using PizzaOrderingApi.DataServices;
+using PizzaOrderingApi.Settings;
+using Services;
 
-namespace PizzaOrderApi
+namespace PizzaOrderingApi
 {
     public class Startup
     {
@@ -25,6 +32,15 @@ namespace PizzaOrderApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("COP"));
+
+            services.Configure<AuthSettings>(options => Configuration.GetSection("AuthSettings").Bind(options));
+
+            services.AddSingleton<IAuthorizationService>(x => new AuthorizationService(x.GetRequiredService<IOptions<AuthSettings>>().Value.UserName,
+                                                                        x.GetRequiredService<IOptions<AuthSettings>>().Value.Password));
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
             services.AddControllers();
         }
 

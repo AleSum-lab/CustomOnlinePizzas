@@ -8,7 +8,7 @@ namespace DataModels
     {
         public int Id { get; set; }
         public Guid UserId { get; set; }
-        public IList<Pizza> Items { get; set; }
+        public ICollection<Pizza> Items { get; set; }
         public double DeliveryDistance { get; set; }
         public double DeliveryFee { get; set; }
         public double TotalPrice { get; set; }
