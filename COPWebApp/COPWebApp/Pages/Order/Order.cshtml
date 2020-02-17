@@ -1,13 +1,26 @@
 ﻿@page
 @model COPWebApp.OrderModel
+@inject SignInManager<IdentityUser> SignInManager
 @using System.Globalization
-@{    
-    ViewData["Title"] = "Order";    
-}
+
 
 <div class="container">
     <div class="row">
-        <div class="col p-4" style="border:2px solid grey">
+        <div class="col">
+            <h1 class=" display-3 text-center">Welcome.</h1>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col">
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <h2 class="text-center">Please login to start ordering.</h2>
+            }
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-5 p-4" style="border:2px solid grey">
             <h4>Create your pizza</h4>
             <form asp-page-handler="addItem" method="post">
                 <table id="createPizzaTable" class="table table-borderless table-hover" style="width:100%">
@@ -15,7 +28,7 @@
                         <td>Tomato sauce</td>
                         <td>
                             <input type="hidden" value="@ViewData["TomatoSauce"]" id="tomatoSauce" />
-                            <input asp-for="TomatoChecked" class="form-check-input" onchange="" id="cbTomato" onclick="add('tomatoSauce')"/>
+                            <input asp-for="TomatoChecked" class="form-check-input" onchange="" id="cbTomato" onclick="add('tomatoSauce')" />
                             <label asp-for="TomatoChecked" class="form-check-label">$@ViewData["TomatoSauce"]</label>
                         </td>
                     </tr>
@@ -23,7 +36,7 @@
                         <td>Mozzarella cheese</td>
                         <td>
                             <input type="hidden" value="@ViewData["MozzarellaCheese"]" id="mozzarellaCheese" />
-                            <input asp-for="MozzarellaChecked" class="form-check-input" id="cbMozzarella" onclick="add('mozzarellaCheese')"/>
+                            <input asp-for="MozzarellaChecked" class="form-check-input" id="cbMozzarella" onclick="add('mozzarellaCheese')" />
                             <label asp-for="MozzarellaChecked" class="form-check-label">$@ViewData["MozzarellaCheese"]</label>
                         </td>
                     </tr>
@@ -31,7 +44,7 @@
                         <td>Ham</td>
                         <td>
                             <input type="hidden" value="@ViewData["Ham"]" id="ham" />
-                            <input asp-for="HamChecked" class="form-check-input" id="cbHam" onclick="add('ham')"/>
+                            <input asp-for="HamChecked" class="form-check-input" id="cbHam" onclick="add('ham')" />
                             <label asp-for="HamChecked" class="form-check-label">$@ViewData["Ham"]</label>
                         </td>
                     </tr>
@@ -39,7 +52,7 @@
                         <td>Kebab</td>
                         <td>
                             <input type="hidden" value="@ViewData["Kebab"]" id="kebab" />
-                            <input asp-for="KebabChecked" class="form-check-input" id="cbKebab" onclick="add('kebab')"/>
+                            <input asp-for="KebabChecked" class="form-check-input" id="cbKebab" onclick="add('kebab')" />
                             <label asp-for="KebabChecked" class="form-check-label">$@ViewData["Kebab"]</label>
                         </td>
                     </tr>
@@ -53,14 +66,19 @@
                     <tr></tr>
                     <tr>
                         <td></td>
-                        <td class="pl-0">
-                            <input type="submit" value="ADD TO CART" class="btn btn-light" />
-                        </td>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <td class="pl-0">
+                                <input type="submit" value="ADD TO CART" class="btn btn-light" />
+                            </td>
+                        }
+
                     </tr>
-                </table>                
+                </table>
             </form>
         </div>
-        <div class="col p-4" style="border:2px solid grey">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-6 p-4" style="border:2px solid grey">
             <h4>Order summary</h4>
             <form asp-page-handler="placeOrder" method="post">
                 <div class="row" style="overflow-y:scroll; max-height:150px;">
@@ -91,7 +109,7 @@
                             <tr>
                                 <td>Distance</td>
                                 <td>
-                                    <input asp-for="Order.DeliveryDistance" class="form-control" id="distance" oninput="calculateDeliveryFee()"/>
+                                    <input asp-for="Order.DeliveryDistance" class="form-control" id="distance" oninput="calculateDeliveryFee()" />
                                 </td>
                             </tr>
                             <tr>
@@ -112,9 +130,13 @@
                             <tr></tr>
                             <tr>
                                 <td></td>
-                                <td class="pl-0">
-                                    <input type="submit" value="PLACE ORDER" class="btn btn-light" />
-                                </td>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <td class="pl-0">
+                                        <input type="submit" value="PLACE ORDER" class="btn btn-light" />
+                                    </td>
+                                }
+                                    
                             </tr>
                         </table>
                     </div>

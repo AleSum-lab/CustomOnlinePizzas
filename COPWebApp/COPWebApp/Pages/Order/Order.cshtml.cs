@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ApplicationSettings;
 using BusinessModels;
 using Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -90,16 +91,7 @@ namespace COPWebApp
 
             var result = await _client.Post(Order, new Uri(_optionsEndpoint.Value.OrderServiceUrl)).ConfigureAwait(false);
 
-            if(result.IsSuccessStatusCode)
-            {
-                ViewData["OrderResult"] = "Thank you for your order!";
-            }
-            else
-            {
-                ViewData["OrderResult"] = "Something went wrong. Your order was not created. Please try again.";
-            }
-            PopulateView();
-            return Page();
+            return RedirectToPage("./OrderHistory");
         }
 
         private Pizza PreparePizza(double basePrice)

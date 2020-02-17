@@ -21,11 +21,11 @@ namespace Strategies.DiscountStrategies
         {
             if(pizza.Ingredients.Contains(Ingredient.TomatoSauce))
             {
-                pizza.TotalPrice -= _ingredientPriceSettings.Value.TomatoSauce;
+                pizza.TotalPrice -= Math.Round(_ingredientPriceSettings.Value.TomatoSauce, 2);
             }
             if(pizza.Ingredients.Contains(Ingredient.MozzarellaCheese))
             {
-                pizza.TotalPrice -= _ingredientPriceSettings.Value.MozzarellaCheese;
+                pizza.TotalPrice -= Math.Round(_ingredientPriceSettings.Value.MozzarellaCheese, 2);
             }
 
             return pizza;

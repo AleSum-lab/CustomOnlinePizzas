@@ -67,7 +67,7 @@ namespace Services
                         break;
                 }
             }
-            input.TotalPrice = totalPrice;
+            input.TotalPrice = Math.Round(totalPrice, 2);
             return input;
         }
 
@@ -86,7 +86,7 @@ namespace Services
         private void SetDeliveryStrategy(Order order)
         {
             double distance = order.DeliveryDistance;
-            if (distance < 5)
+            if (distance < 5 || distance > 20)
             {
                 _deliveryStrategy = new FreeDeliveryStrategy();
             }

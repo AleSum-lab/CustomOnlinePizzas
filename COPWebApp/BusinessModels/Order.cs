@@ -15,13 +15,13 @@ namespace BusinessModels
         public double TotalPrice {
             get
             {
-                double result = DeliveryFee;
+                var totalPrice = DeliveryFee;
                 foreach (var item in Items)
                 {
-                    result += item.TotalPrice;
+                    totalPrice += item.TotalPrice;
                 }
 
-                return result;
+                return totalPrice;
             }
         }
         

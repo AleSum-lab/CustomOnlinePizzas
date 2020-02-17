@@ -66,16 +66,16 @@ function calculateDeliveryFee() {
     else if (distance >= 5 && distance < 10) {
         feeLabel.innerHTML = "$" + fiveToTen;
         result = totalValue + fiveToTen;
-        totalLabel.innerHTML = "$" + result;
+        totalLabel.innerHTML = "$" + result.toFixed(2);
 
     }
     else if (distance >= 10 && distance <= 20) {
         feeLabel.innerHTML = "$" + tenToTwenty;
         result = totalValue + tenToTwenty;
-        totalLabel.innerHTML = "$" + result;
+        totalLabel.innerHTML = "$" + result.toFixed(2);
     }
     else if (distance > 20) {
-        feeLabel.innerHTML = "Delivery Unavailable";
+        feeLabel.innerHTML = "Self Pickup";
     }
 
 

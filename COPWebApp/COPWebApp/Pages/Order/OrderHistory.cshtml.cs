@@ -8,12 +8,14 @@ using ApplicationSettings;
 using BusinessModels;
 using Contracts;
 using COPWebApp.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
 namespace COPWebApp
 {
+    [Authorize]
     public class OrderHistoryModel : PageModel
     {
         private IServiceClient _client;

@@ -41,7 +41,10 @@ namespace COPWebApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AddPageRoute("/Order/Order", "");
+            });
 
             services.Configure<EndpointSettings>(options => Configuration.GetSection("EndpointSettings").Bind(options));
             services.Configure<AuthSettings>(options => Configuration.GetSection("AuthSettings").Bind(options));

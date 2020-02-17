@@ -6,6 +6,7 @@ namespace BusinessModels
 {
     public class Pizza
     {
+        private string description;
         public int Id { get; set; }        
         public double BasePrice { get; set; }
         public double TotalPrice { get; set; }
@@ -14,21 +15,30 @@ namespace BusinessModels
         {
             get
             {
-                string result = "Pizza with ";
-
-                for (int i = 0; i < Ingredients.Count; i++)
+                if (Ingredients.Count == 0)
                 {
-                    if(i == Ingredients.Count -1)
-                    {
-                        result += $"{Ingredients[i].ToString()}.";
-                    }
-                    else
-                    {
-                        result += $"{Ingredients[i].ToString()}, ";
-                    }
+                    return description;
                 }
-                return result;
+                else
+                {
+                    description = "Pizza with ";
+
+                    for (int i = 0; i < Ingredients.Count; i++)
+                    {
+                        if (i == Ingredients.Count - 1)
+                        {
+                            description += $"{Ingredients[i].ToString()}.";
+                        }
+                        else
+                        {
+                            description += $"{Ingredients[i].ToString()}, ";
+                        }
+                    }
+                    return description;
+                }
+                
             }
+            set => description = value;
         }
 
     }

@@ -1,35 +1,49 @@
 ﻿@page
 @model COPWebApp.OrderHistoryModel
+@using System.Globalization
 @{
     ViewData["Title"] = "OrderHistory";
 }
 
 <div class="container">
     <div class="row">
-        <div class="col p-4">
+        <div class="col-md-12 p-4">
             <h4>Your Order History</h4>
-            <table>
+            <div>
+                <a asp-page="Order">Continue Shopping</a>
+            </div>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th> @Html.DisplayNameFor(model => model.Orders[0].Id)</th>
-                        <th> @Html.DisplayNameFor(model => model.Orders[0].DateCreated)</th>
-                        <th> @Html.DisplayNameFor(model => model.Orders[0].Items)</th>
-                        <th> @Html.DisplayNameFor(model => model.Orders[0].DeliveryFee)</th>
-                        <th> @Html.DisplayNameFor(model => model.Orders[0].DeliveryDistance)</th>
-                        <th> @Html.DisplayNameFor(model => model.Orders[0].TotalPrice)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Orders[0].Id)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Orders[0].DateCreated)</th>
+
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Orders[0].DeliveryFee)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Orders[0].DeliveryDistance)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Orders[0].TotalPrice)</th>
+                        <th scope="col"> @Html.DisplayNameFor(model => model.Orders[0].Items)</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Orders)
                     {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Items)</td>          @*Fix me*@
-                        <td>@Html.DisplayFor(modelItem => item.DeliveryFee)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DeliveryDistance)</td>
-                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                    </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+
+                            <td>@Html.DisplayFor(modelItem => item.DeliveryFee)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DeliveryDistance)</td>
+                            <td>@item.TotalPrice.ToString("F2", CultureInfo.InvariantCulture.NumberFormat)</td>
+                            <td>
+                                @foreach (var pizza in item.Items)
+                                {
+                                    <div class="row">
+                                        @pizza.Description
+                                    </div>
+                                }
+                            </td>
+
+                        </tr>
                     }
                 </tbody>
             </table>
